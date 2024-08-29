@@ -8,7 +8,10 @@ class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final FocusNode? focusNode;
-  const MyTextField({super.key, required this.obscureText, required this.controller, required this.hintText, this.focusNode});
+  final  void Function()? onEditingComplete;
+  final  TextInputAction? textInputAction;
+  final void Function()? onTap;
+  const MyTextField({super.key, required this.obscureText, required this.controller, required this.hintText, this.focusNode, this.onEditingComplete, this.textInputAction, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +22,7 @@ class MyTextField extends StatelessWidget {
       focusNode: focusNode,
       controller: controller,
       obscureText: obscureText,
+      onTap: onTap,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(

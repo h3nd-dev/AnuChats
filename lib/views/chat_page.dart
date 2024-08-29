@@ -96,7 +96,12 @@ class _ChatPageState extends State<ChatPage> {
             child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.receiversEmail),
+            SizedBox(
+              width: 180,
+              child: Text(widget.receiversEmail, style: TextStyle(
+                overflow: TextOverflow.ellipsis
+              ),),
+            ),
             GestureDetector(
                 onTap: () {
                   showActionDialog(
@@ -109,8 +114,10 @@ class _ChatPageState extends State<ChatPage> {
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(child: _buildMessageList()),
+            Expanded( child: _buildMessageList(),),
             _buildInputText(
                 onTap: () => sendMessage(blockedUserId: widget.receiverId))
           ],
@@ -160,20 +167,21 @@ class _ChatPageState extends State<ChatPage> {
                 context: context,
                 reportController: reportController,
                 onPressed: () {
-                 try {
+                  try {
                     chatServices.report(
                         messageId: data['messageId'],
                         userId: data['receiverId']);
-                    showMessage(message: "Message reported successfully", context: context);
-                  }catch(e){
-                   error(message: e.toString(), context: context);
-
-                 }
+                    showMessage(
+                        message: "Message reported successfully",
+                        context: context);
+                  } catch (e) {
+                    error(message: e.toString(), context: context);
+                  }
                 }),
             child: IntrinsicWidth(
               child: Container(
                   constraints: const BoxConstraints(maxWidth: 230),
-                  padding: const EdgeInsets.all(25),
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                   decoration: BoxDecoration(
                       color: isCurrentUser
                           ? isDarkMode
@@ -207,16 +215,19 @@ class _ChatPageState extends State<ChatPage> {
           width: 15,
         ),
         GestureDetector(
-            onTap: onTap,
-            child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                    color: Colors.green, shape: BoxShape.circle),
-                child: const Center(
-                    child: Icon(
-                  Icons.send,
-                  color: Colors.white,
-                ))))
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+                color: Colors.green, shape: BoxShape.circle),
+            child: const Center(
+              child: Icon(
+                Icons.send,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

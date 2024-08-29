@@ -62,9 +62,13 @@ class UserTile extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(text, style: const TextStyle(
-                        fontWeight: FontWeight.bold
-                      ),),
+                      SizedBox(
+                        width: 90,
+                        child: Text(text, style: const TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          fontWeight: FontWeight.bold
+                        ),),
+                      ),
                       SizedBox(height: 10,),
                       Text(subtitle,style: const TextStyle(
                           fontSize: 12
